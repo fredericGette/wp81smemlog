@@ -14,4 +14,4 @@ sc start wp81controlsmemdevice
 Logs:
 
 sc start wp81dbgPrint
-wp81debug.exe dbgprint | findstr /C:"ListenerDriver"
+wp81debug.exe dbgprint | findstr /C:"DriverEntry"
