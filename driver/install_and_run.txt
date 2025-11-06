@@ -1,0 +1,17 @@
+Install:
+
+- control driver
+sc create wp81controlsmemdevice type= kernel binPath= C:\Data\USERS\Public\Documents\wp81controlsmemdevice.sys
+
+
+Run:
+
+
+- control driver
+sc start wp81controlsmemdevice
+
+
+Logs:
+
+sc start wp81dbgPrint
+wp81debug.exe dbgprint | findstr /C:"ListenerDriver"
