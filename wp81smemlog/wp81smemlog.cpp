@@ -49,23 +49,29 @@ int main()
     in_read[0] = 0;   // logIndex
     in_read[1] = 5;  // maxNbEntries
 
-    uint8_t out_read[112];
-    memset(out_read, 0, sizeof(out_read));
-    ok = DeviceIoControl(h, IOCTL_MYDRV_READ_LOG_EVENTS, in_read, sizeof(in_read), out_read, sizeof(out_read), &bytes, NULL);
-    if (!ok) {
-        printf("IOCTL_READ_LOG_EVENTS failed %u\n", GetLastError());
-    } else {
-        uint32_t nbDropped = *(uint32_t*)(out_read + 0);
-        uint32_t nbAvailable = *(uint32_t*)(out_read + 4);
-        uint32_t ret = *(uint32_t*)(out_read + 8);
-        printf("IOCTL_READ_LOG_EVENTS succeeded: nbDropped=%u nbAvailable=%u ret=%u bytes=%u\n", nbDropped, nbAvailable, ret, bytes);
-        printf("Payload:\n");
-        for (int i = 0; i < 100 && i < (int)(sizeof(out_read) - 12); ++i) {
-            printf("%02X ", out_read[12 + i]);
-            if ((i % 20) == 19) printf("\n");
-        }
-        printf("\n");
-    }
+	uint32_t nbAvailable = 0;
+	uint32_t out_read[28];
+	do {
+
+		memset(out_read, 0, sizeof(out_read));
+		ok = DeviceIoControl(h, IOCTL_MYDRV_READ_LOG_EVENTS, in_read, sizeof(in_read), out_read, sizeof(out_read), &bytes, NULL);
+		if (!ok) {
+			printf("IOCTL_READ_LOG_EVENTS failed %u\n", GetLastError());
+		}
+		else {
+			uint32_t nbDropped = *(uint32_t*)(out_read + 0);
+			nbAvailable = *(uint32_t*)(out_read + 1);
+			uint32_t nbRead = *(uint32_t*)(out_read + 2);
+			//printf("IOCTL_READ_LOG_EVENTS succeeded: nbDropped=%u nbAvailable=%u nbRead=%u bytes=%u\n", nbDropped, nbAvailable, nbRead, bytes);
+			//printf("Payload:\n");
+			for (unsigned int i = 0; i < nbRead*5 && i < (sizeof(out_read) - 3); ++i) {
+				printf("%08X ", out_read[3 + i]);
+				if ((i % 5) == 4) printf("\n");
+			}
+			//printf("\n");
+		}
+
+	} while (ok && nbAvailable>0);
 
     CloseHandle(h);
     return 0;
