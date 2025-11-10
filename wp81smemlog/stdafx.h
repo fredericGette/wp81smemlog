@@ -14,9 +14,10 @@
 
 
 // TODO: reference additional headers your program requires here
-#include <windows.h>
 #include <stdlib.h>
-#include <stdint.h>
+#include <string.h>
+#include <stddef.h>
+#include "smem_log.h"
 
 extern "C" {
 	WINBASEAPI HANDLE WINAPI CreateFileA(LPCSTR lpFileName, DWORD dwDesiredAccess, DWORD dwShareMode, LPSECURITY_ATTRIBUTES lpSecurityAttributes, DWORD dwCreationDisposition, DWORD dwFlagsAndAttributes, HANDLE hTemplateFile);
