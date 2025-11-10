@@ -27,6 +27,9 @@
     <ClInclude Include="smem_log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Getopt-for-Visual-Studio\getopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

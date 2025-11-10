@@ -21,9 +21,13 @@ typedef struct {
 * @param base_time_ptr Pointer to the current base time (updated if relative_time_ptr is TRUE).
 * @param relative_time_ptr Pointer to the flag indicating if relative time must be set.
 * @param ticks_flag Flag: TRUE if time should be printed in raw ticks, FALSE for seconds.
+* @param newLine_flag Flag: TRUE if print new record on a new line, FALSE for print on the same line.
 */
 void print_event(
 	const SmemLogRecord *rec,
 	uint32_t *base_time_ptr,
 	bool *relative_time_ptr,
-	bool ticks_flag);
+	bool ticks_flag,
+	bool newLine_flag);
+
+void print_raw_event(const SmemLogRecord rec);
