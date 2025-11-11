@@ -7,7 +7,7 @@ This shared memory is managed by the [qcsmem8930.sys](https://github.com/frederi
 
 ![Help](Capture01.JPG)
 
-By default the log index is 0 which correspond to the logs of the modem subsystem (SMEM_LOG_EVENTS).  
+By default the log index is 0, which corresponds to the logs of the modem subsystem (SMEM_LOG_EVENTS).  
 
 ![Logs](Capture02.JPG)
 
